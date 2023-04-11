@@ -10,7 +10,7 @@ WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 builder.Host.UseSerilog((context, services, configuration) => configuration
     .WriteTo.Console()
-    .WriteTo.AzureTableStorage(services.GetRequiredService<TableServiceClient>(), storageTableName: "test"));
+    .WriteTo.AzureTableStorage(new TableServiceClient("UseDevelopmentStorage=true"), storageTableName: "test"));
 
 //this causes a stack overflow / infinite loop in di
 builder.Services.AddAzureClients(clients =>
